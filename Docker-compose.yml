@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+    kali-linux:
+        image: lscr.io/linuxserver/kali-linux:latest
+        container_name: kali-linux
+        security_opt:
+            - seccomp=unconfined  # optional
+        environment:
+            - PUID=197609
+            - PGID=197609
+            - TZ=Etc/UTC
+            - SUBFOLDER=/
+            - TITLE=Kali Linux
+        ports:
+            - "3000:3000"
+            - "3001:3001"
+        # devices:
+        #     - "/dev/dri:/dev/dri"  # optional
+        shm_size: "1gb"  # optional
+        restart: unless-stopped
+        networks:
+            hacking-lab:
+                ipv4_address: 172.20.0.10  # Fixed IP for kali-linux container
+
+    vulnerable:
+        image: vulnerables/web-dvwa
+        networks:
+            - hacking-lab
+        deploy:
+            restart_policy:
+                condition: on-failure
+
+networks:
+    hacking-lab:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.20.0.0/24
