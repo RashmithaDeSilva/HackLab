@@ -1,27 +1,36 @@
 version: '3.8'
 
 services:
-    kali-linux:
-        image: lscr.io/linuxserver/kali-linux:latest
-        container_name: kali-linux
-        security_opt:
-            - seccomp=unconfined  # optional
-        environment:
-            - PUID=197609
-            - PGID=197609
-            - TZ=Etc/UTC
-            - SUBFOLDER=/
-            - TITLE=Kali Linux
-        ports:
-            - "3000:3000"
-            - "3001:3001"
-        # devices:
-        #     - "/dev/dri:/dev/dri"  # optional
-        shm_size: "1gb"  # optional
+    kali-linux-c:
+        image: kalilinux/kali-rolling
+        container_name: kali-linux-c
+        stdin_open: true  # Equivalent to -i
+        tty: true         # Equivalent to -t
         restart: unless-stopped
         networks:
             hacking-lab:
-                ipv4_address: 172.20.0.10  # Fixed IP for kali-linux container
+                ipv4_address: 172.20.0.5  # Fixed IP for kali-linux-c container
+
+    kali-linux-vc:
+        image: lscr.io/linuxserver/kali-linux
+        container_name: kali-linux-vc
+        security_opt: # optional
+            - seccomp=unconfined
+        environment:
+            - PUID=197609 # Replace with your pc id (that can get using this command 'id')
+            - PGID=197609 # Replace with your pc id (that can get using this command 'id')
+            - TZ=Etc/UTC
+            - SUBFOLDER=/
+            - TITLE=Kali-Linux-VC
+        ports:
+            - 3000:3000
+            - 3001:3001
+        dvice: dev/dir:/dve/dir # optional (This will connect your GPU with Container and this will work with only Linux)  
+        shm_size: "1gb"
+        restart: unless-stopped
+        networks:
+            hacking-lab:
+                ipv4_address: 172.20.0.10  # Fixed IP for kali-linux-vc container
 
     vulnerable:
         image: vulnerables/web-dvwa
@@ -34,6 +43,7 @@ services:
 networks:
     hacking-lab:
         driver: bridge
+        internal: true # Comment this if you using kali-linux-vc or if you need to connect this network and internet
         ipam:
             config:
                 - subnet: 172.20.0.0/24
