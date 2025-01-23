@@ -17,8 +17,8 @@ services:
         security_opt: # optional
             - seccomp=unconfined
         environment:
-            - PUID=197609 # Replace with your pc id (that can get using this command 'id')
-            - PGID=197609 # Replace with your pc id (that can get using this command 'id')
+            - PUID=1000 # Replace with your pc id (that can get using this command 'id')
+            - PGID=1000 # Replace with your pc id (that can get using this command 'id')
             - TZ=Etc/UTC
             - SUBFOLDER=/
             - TITLE=Kali-Linux-VC
