@@ -25,7 +25,7 @@ services:
         ports:
             - 3000:3000
             - 3001:3001
-        dvice: dev/dir:/dve/dir # optional (This will connect your GPU with Container and this will work with only Linux)  
+        device: dev/dir:/dve/dir # optional (This will connect your GPU with Container and this will work with only Linux)
         shm_size: "1gb"
         restart: unless-stopped
         networks:
