@@ -2,6 +2,8 @@
 
 This repository contains configuration files and scripts to set up a Dockerized environment for testing and learning about vulnerabilities using Kali Linux and other related tools. Below is the detailed explanation and usage guide for each component of this repository.
 
+![alt text](README-imgs/kali-linux-vc.png)
+
 <br>
 
 ## Table of Contents
@@ -88,7 +90,7 @@ The `setup.sh` script simplifies container creation for Linux/Mac users.
    ```
 
    * Before using set your PC ID in Compose File (you can get it using the 'id' command in the terminal) then replace it with compose file "PUID" and "PGID" Also if you need more access to work comment "security_opt" in compose file also if you are using windows comment "device" in Compose File. 
-   
+
 2. **Using Docker Compose:**
    - Start all services:
      ```bash
