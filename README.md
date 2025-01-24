@@ -94,11 +94,11 @@ The `setup.sh` script simplifies container creation for Linux/Mac users.
 2. **Using Docker Compose:**
    - Start all services:
      ```bash
-     docker-compose up -d
+     docker compose up -d
      ```
    - Stop all services:
      ```bash
-     docker-compose down
+     docker compose down
      ```
 
 3. **Using Scripts:**
