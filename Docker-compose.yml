@@ -32,10 +32,11 @@ services:
             hacking-lab:
                 ipv4_address: 172.20.0.10  # Fixed IP for kali-linux-vc container
 
-    vulnerable:
+    vulnerable-dvwac:
         image: vulnerables/web-dvwa
         networks:
-            - hacking-lab
+            hacking-lab:
+                ipv4_address: 172.20.0.3
         deploy:
             restart_policy:
                 condition: on-failure

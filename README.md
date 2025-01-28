@@ -107,6 +107,8 @@ The `setup.sh` script simplifies container creation for Linux/Mac users.
 
 4. Access the services via their respective ports (e.g., `http://localhost:3000` for `kali-linux-vc`).
 
+5. Access the `vulnerable-dvwa` container search `http://172.20.0.3:80` in the `kali-linux-vc` browser and its default Username `admin` and Password `password`.
+
 <br>
 
 ## Components Overview
