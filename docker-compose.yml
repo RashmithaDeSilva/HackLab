@@ -8,14 +8,15 @@ services:
         tty: true         # Equivalent to -t
         restart: unless-stopped
         networks:
-            hacking-lab:
-                ipv4_address: 172.20.0.5  # Fixed IP for kali-linux-c container
+            hacking-lab-ex:
+            hacking-lab-in:
+                ipv4_address: 172.20.2.5  # Fixed IP for kali-linux-c container (must match subnet)
 
     kali-linux-vc:
         image: lscr.io/linuxserver/kali-linux
         container_name: kali-linux-vc
-        security_opt: # optional
-            - seccomp=unconfined
+        # security_opt: # optional
+        #     - seccomp=unconfined
         environment:
             - PUID=1000 # Replace with your pc id (that can get using this command 'id')
             - PGID=1000 # Replace with your pc id (that can get using this command 'id')
@@ -25,26 +26,32 @@ services:
         ports:
             - 3000:3000
             - 3001:3001
-        device: dev/dir:/dve/dir # optional (This will connect your GPU with Container and this will work with only Linux)
+        # devices:
+        #     - "/dev/dir:/dev/dir" # optional (This will connect your GPU with Container and this will work with only Linux)
         shm_size: "1gb"
         restart: unless-stopped
         networks:
-            hacking-lab:
-                ipv4_address: 172.20.0.10  # Fixed IP for kali-linux-vc container
+            hacking-lab-ex:
+            hacking-lab-in:
+                ipv4_address: 172.20.2.10  # Fixed IP for kali-linux-vc container (must match subnet)
 
     vulnerable-dvwac:
         image: vulnerables/web-dvwa
+        restart: unless-stopped
         networks:
-            hacking-lab:
-                ipv4_address: 172.20.0.3
-        deploy:
-            restart_policy:
-                condition: on-failure
+            hacking-lab-in:
+                ipv4_address: 172.20.2.3  # Fixed IP for vulnerable-dvwac container (must match subnet)
 
 networks:
-    hacking-lab:
+    hacking-lab-ex: # External network for internet access
         driver: bridge
-        internal: true # Comment this if you using kali-linux-vc or if you need to connect this network and internet
         ipam:
             config:
-                - subnet: 172.20.0.0/24
+                - subnet: 172.20.1.0/24
+
+    hacking-lab-in: # Internal network for communication between containers
+        driver: bridge
+        internal: true
+        ipam:
+            config:
+                - subnet: 172.20.2.0/24
