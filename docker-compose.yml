@@ -15,8 +15,8 @@ services:
     kali-linux-vc:
         image: lscr.io/linuxserver/kali-linux
         container_name: kali-linux-vc
-        # security_opt: # optional
-        #     - seccomp=unconfined
+        security_opt: # optional
+            - seccomp=unconfined
         environment:
             - PUID=1000 # Replace with your pc id (that can get using this command 'id')
             - PGID=1000 # Replace with your pc id (that can get using this command 'id')
@@ -26,8 +26,8 @@ services:
         ports:
             - 3000:3000
             - 3001:3001
-        # devices:
-        #     - "/dev/dir:/dev/dir" # optional (This will connect your GPU with Container and this will work with only Linux)
+        devices:
+            - "/dev/dir:/dev/dir" # optional (This will connect your GPU with Container and this will work with only Linux)
         shm_size: "1gb"
         restart: unless-stopped
         networks:
