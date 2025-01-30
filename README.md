@@ -102,14 +102,18 @@ The `setup.sh` script simplifies container creation for Linux/Mac users.
    * Before using, set your PC ID in the Compose File (you can get it using the `id` command in the terminal) and replace it with the `PUID` and `PGID` values in the compose file. Also, if you need more access to work, comment out the `security_opt` section in the compose file. If you are using Windows, comment out the `device` section in the compose file.
 
 2. **Using Docker Compose:**
-   - Start all services:
-     ```bash
-     docker compose up -d
-     ```
-   - Stop all services:
-     ```bash
-     docker compose down
-     ```
+  - Start all services:
+    ```bash
+    docker compose up -d
+    ```
+  - Stop all services:
+    ```bash
+    docker compose down --volumes
+    ```
+  - Stop all services with imagers:
+    ```bash
+    docker compose down --volumes --rmi all
+    ```
 
 3. **Using Scripts:**
    - On Windows, run `setup.bat`.
