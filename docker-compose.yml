@@ -20,9 +20,14 @@ services:
         environment:
             - PUID=1000 # Replace with your pc id (that can get using this command 'id')
             - PGID=1000 # Replace with your pc id (that can get using this command 'id')
-            - TZ=Etc/UTC
+            - TZ=America/Los_Angeles
             - SUBFOLDER=/
-            - TITLE=Kali-Linux-VC
+            - TITLE=Kali-Linux-VC # optional
+            - CUSTOM_USER=kali # optional
+            - PASSWORD=kali # optional
+        volumes:
+            - /path/to/data:/config # optional 
+            - /var/run/docker.sock:/var/run/docker.sock # optional
         ports:
             - 3000:3000
             - 3001:3001
