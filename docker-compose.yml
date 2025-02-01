@@ -15,6 +15,7 @@ services:
     kali-linux-vc:
         image: lscr.io/linuxserver/kali-linux
         container_name: kali-linux-vc
+        privileged: true # optional but not needed unless you are running docker inside the container
         security_opt: # optional
             - seccomp=unconfined
         environment:
@@ -27,7 +28,7 @@ services:
             - PASSWORD=kali # optional
         volumes:
             - /path/to/data:/config # optional 
-            - /var/run/docker.sock:/var/run/docker.sock # optional
+            - /var/run/docker.sock:/var/run/docker.sock # optional but not needed unless you are running docker inside the container
         ports:
             - 3000:3000
             - 3001:3001
