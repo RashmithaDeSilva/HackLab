@@ -15,7 +15,7 @@ services:
     kali-linux-vc:
         image: lscr.io/linuxserver/kali-linux
         container_name: kali-linux-vc
-        privileged: true # optional but not needed unless you are running docker inside the container
+        privileged: true # optional (This will be useful if you are running docker inside the container and some system permissions with apps ex: nmap)
         security_opt: # optional
             - seccomp=unconfined
         environment:
@@ -33,7 +33,7 @@ services:
             - 3000:3000
             - 3001:3001
         devices:
-            - "/dev/dir:/dev/dir" # optional (This will connect your GPU with Container and this will work with only Linux)
+            - "/dev/dir:/dev/dir" # optional (This will connect your GPU with Container and this work with only Linux)
         shm_size: "1gb"
         restart: unless-stopped
         networks:
